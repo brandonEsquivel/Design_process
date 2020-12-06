@@ -1,6 +1,6 @@
 /*	Brandon Esquive Molina
 	brandon.esquivel@ucr.ac.cr
-   Counter module with 4-modes operation
+  32-bits Counter module with 4-modes operation
 */
 
 /*DEFINES */
@@ -25,13 +25,14 @@ module contador(
   output reg [7:0] LOAD
 
 );
-
+/* LOCAL PARAMS */
 localparam COUNT_UP = 2'b00;
 localparam COUNT_DOWN = 2'b01;
 localparam COUNT_3_DOWN = 2'b10;
 localparam CHARGE = 2'b11;
 localparam SIZE = 8;
 
+/* REGS AND WIRES */
 reg [1:0] MODO_reg [7:0];
 reg [7:0] nRCO;
 reg [31:0] D_reg;
@@ -39,6 +40,9 @@ wire [31:0] wQ;
 wire [7:0] wLOAD;
 wire [7:0] WnRCO;
 
+
+
+//////////// RESET stage, init of arrays and regs ///////////////
 integer x, y;
    always @(posedge clk) begin
       if (RESET) begin
@@ -55,9 +59,11 @@ integer x, y;
 
 
 
-always@( posedge clk )begin
+////// Assign - combinational & sequential logic to interconnect the 32b counter //////
 
-  D_reg <= wQ;
+always@( negedge clk )begin
+
+  D_reg = wQ;
 
   if(nRCO[0]) begin
     MODO_reg[1] = MODO;
@@ -105,7 +111,7 @@ end
 
 
 
-
+////////////////// 8 4-bit counter submodules are instantiated /////////
 
 contador_4b cont4b_0(
   .clk        (   clk       ),
@@ -208,13 +214,10 @@ contador_4b cont4b_7(
 );
 
 
+/////////////////////// end counter submodules
 
 
-
-
-
-
-
+/// Final spreads /////
 
 always@(*)begin
   RCO     = nRCO[7];

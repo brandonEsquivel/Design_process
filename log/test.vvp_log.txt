@@ -1,5 +1,1 @@
-** VVP Stop(0) **
-** Flushing output streams.
-** Current simulation time is 14242597700000 ticks.
-> 
-> ** Continue **
+VCD info: dumpfile ./test.vcd opened for output.

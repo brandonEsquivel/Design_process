@@ -72,7 +72,7 @@ reg [1:0] MODO_reg;
                end
 
                COUNT_UP: begin
-                  if( Q == 4'b1111 ) begin
+                  if( Q == 4'b1110 ) begin
                      RCO   <= 1'b1;
                      Q     <= Q[3:0] + 4'b0001;
                      LOAD  <= 0;

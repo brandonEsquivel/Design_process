@@ -2,7 +2,7 @@
 
 # Making verilog makefile
 # Makefile to simulate Verilog HDL designs under GNU.
-# an adaptation of the joint work with Belinda Brown. The best colleague to date
+# an adaptation of the joint work with Belinda Brown. My best colleague to date
 # Brandon Esquivel Molina
 # brandon.esquivel@ucr.ac.cr
 
@@ -100,19 +100,15 @@ _Y_COUNT = counter.ys
 #******************************************************************************
 #### 						make the complete test
 #******************************************************************************
-#if you feel lazy, just make all<count>.
+#if you feel lazy, just make all
 
-Allcount: 	clean ycount rcount ccount gtkwave
+all: 	clean  ccount gtkwave32
 
-AllcountA: 	clean ycount rcount ccount gtkwaveA
+AllA: 	clean  ccount gtkwaveA
 
 ## individual steps
 
-ycount:
-	yosys $(YOSYS)$(_Y_COUNT)
 
-rcount:
-	sed -i ' s/contador/contador_syn/g' $(SYN)$(_CONTADOR_SYN)
 
 ccount:
 	iverilog -o $(OVVP)$(_VVP_TEST) $(TESTBENCHES)$(_TOP_TB)
@@ -120,8 +116,8 @@ ccount:
 
 #target phony
 .PHONY: gtkwavetest
-gtkwave:
-	gtkwave $(_VCD_TEST) config.gtkw
+gtkwave32:
+	gtkwave $(_VCD_TEST) config-32b-RCO-mediociclo.gtkw
 
 gtkwaveA:
 	gtkwave $(_VCD_TEST) configA.gtkw

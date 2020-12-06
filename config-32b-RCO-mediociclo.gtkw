@@ -1,16 +1,17 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Sun Dec  6 00:07:01 2020
+[*] Sun Dec  6 02:54:12 2020
 [*]
 [dumpfile] "/home/bran/Documentos/repositories/Design_process/test.vcd"
-[dumpfile_mtime] "Sat Dec  5 23:54:31 2020"
-[dumpfile_size] 25150
-[savefile] "/home/bran/Documentos/repositories/Design_process/configA.gtkw"
-[timestart] 652000
+[dumpfile_mtime] "Sun Dec  6 02:53:48 2020"
+[dumpfile_size] 2263787
+[savefile] "/home/bran/Documentos/repositories/Design_process/config-32b-RCO-mediociclo.gtkw"
+[timestart] 3426400
 [size] 1853 919
-[pos] -51 -51
-*-18.511389 1223000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-16.511389 7750000 3900000 4000000 7100000 7200000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb_top.
+[treeopen] tb_top.Behav.
 [treeopen] tb_top.tb.
 [sst_width] 223
 [signals_width] 174
@@ -18,11 +19,22 @@
 [sst_vpaned_height] 264
 @28
 tb_top.Behav.clk
-tb_top.Behav.RESET
-tb_top.Behav.ENABLE
-@23
-tb_top.Behav.D[31:0]
+@200
+-
 @28
+tb_top.Behav.RESET
+@200
+-
+@28
+tb_top.Behav.ENABLE
+@200
+-
+@22
+tb_top.Behav.D[31:0]
+@200
+-
+@29
+[color] 2
 tb_top.Behav.MODO[1:0]
 @200
 -
@@ -39,9 +51,14 @@ tb_top.Behav.LOAD[7:0]
 (7)tb_top.Behav.LOAD[7:0]
 @1401200
 -group_end
+@200
+-
 @22
+[color] 2
 tb_top.Behav.Q[31:0]
-@28
-tb_top.Behav.RCO
+@200
+-
+@22
+tb_top.Behav.nRCO[7:0]
 [pattern_trace] 1
 [pattern_trace] 0
