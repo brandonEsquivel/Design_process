@@ -2,12 +2,12 @@
 
 # Making verilog makefile
 # Makefile to simulate Verilog HDL designs under GNU.
-# an adaptation of the joint work with Belinda Brown. The best colleague of my career to date
+# an adaptation of the joint work with Belinda Brown. The best colleague to date
 # Brandon Esquivel Molina
 # brandon.esquivel@ucr.ac.cr
 
 
-# 	Makefile logic: this is a specific version of a very general makefile for synthesis, compilation and simulation.
+# Makefile logic: this is a specific version of a very general makefile for synthesis, compilation and simulation.
 # To create this file you need these files:   -- checker.v clock.v contador<X>.v counters_tb.v driver.v scoreboard.v top_tb.v
 
 #if you feel lazy, just make all.
@@ -115,7 +115,7 @@ rcount:
 	sed -i ' s/contador/contador_syn/g' $(SYN)$(_CONTADOR_SYN)
 
 ccount:
-	iverilog -o $(OVVP)$(_VVP_TEST) -gspecify $(TESTBENCHES)$(_TOP_TB)
+	iverilog -o $(OVVP)$(_VVP_TEST) $(TESTBENCHES)$(_TOP_TB)
 	vvp $(OVVP)$(_VVP_TEST) > $(LOG)$(_VVP_TEST)_log.txt
 
 #target phony

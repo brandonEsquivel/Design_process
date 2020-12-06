@@ -58,7 +58,7 @@ input integer iteration;
     repeat (iteration) begin
 
       @(negedge clk) begin
-        D <= D + 1;       // feedback
+        //D <= D + 1;       // feedback
         if(RCO || MODO==3) begin
           MODO <= MODO + 1;
         end

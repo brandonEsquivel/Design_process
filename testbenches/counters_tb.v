@@ -9,29 +9,26 @@ module counters_tb(
 input wire clk,
 
 // from behav
-input wire [3:0] Q,
-input wire RCO, LOAD,
-
-// from syn
-output reg [3:0]  syn_Q,
-output reg  syn_RCO,  syn_LOAD,
+input wire [31:0] Q,
+input wire RCO,
+input wire [7:0] LOAD,
 
 // Generated signals
 output reg RESET, ENABLE,
-output reg [3:0] D,
+output reg [31:0] D,
 output reg [1:0] MODO
 );
 
 
 `include "./testers/driver.v"
-`include "./src/checker.v"
 
-parameter ITERATIONS = 100;
+parameter ITERATIONS = 10000;
 integer log;
 
 // WIRES
-wire  syn_wRCO,  syn_wLOAD;
-wire [3:0]  syn_wQ;
+wire          wRCO;
+wire [7:0]   wLOAD;
+wire [31:0]    wQ;
 
 initial begin
 
@@ -49,11 +46,11 @@ initial begin
   $fdisplay(log, "time=%5d, Starting Test", $time);
   fork
     drv_MODO_request(ITERATIONS);
-    checker(ITERATIONS);
+    //checker(ITERATIONS);
   join
     //RESET <= 1;     // TESTING reset
     //ENABLE <= 1;
-    //drv_RESET2_request(ITERATIONS);
+    //drv RESET2 request(ITERATIONS);
 
   $fdisplay(log, "time=%5d, MODO Test Completed", $time);
   /*
@@ -61,13 +58,13 @@ initial begin
 
   $fdisplay(log, "time=%5d, Starting Reset", $time); ///////
 
-  drv_init();
+  drv init();
 
   $fdisplay(log, "time=%5d, Reset Completed", $time); /////
 
   $fdisplay(log, "time=%5d, Starting Random Test", $time);
   fork
-    drv_random_request(ITERATIONS);
+    drv random request(ITERATIONS);
     checker(ITERATIONS);
   join
   $fdisplay(log, "time=%5d, MODO Test Completed", $time);
@@ -78,24 +75,18 @@ initial begin
   #200 $finish;
 end
 
-  contador_syn syn(
+  contador count_TB(
     //INPUTS
-    .clk      (clk),
-    .ENABLE   (ENABLE),
-    .RESET    (RESET),
-    .D     (D),
-    .MODO  (MODO),
+    .clk      ( clk ),
+    .ENABLE   ( ENABLE  ),
+    .RESET    ( RESET ),
+    .D        ( D ),
+    .MODO     ( MODO  ),
     // OUTPUTS
-    .Q     ( syn_wQ),
-    .RCO   ( syn_wRCO),
-    .LOAD  ( syn_wLOAD)
+    .Q     (   wQ ),
+    .RCO   (   wRCO ),
+    .LOAD  (   wLOAD  )
   );
-
-  always @(*) begin
-     syn_RCO =  syn_wRCO;
-     syn_LOAD =  syn_wLOAD;
-     syn_Q =  syn_wQ;
-  end
 
 endmodule
 

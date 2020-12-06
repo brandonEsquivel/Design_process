@@ -5,8 +5,6 @@
 
 `include "./src/clock.v"
 `include "./src/counter.v"
-`include "./syn/counter_syn.v"
-`include "./lib/cmos_cells.v"
 `include "./testbenches/counters_tb.v"
 
 
@@ -23,8 +21,9 @@ module tb_top;
 clk clock (.clock (clock));
 
 // WIRES
-wire RESET, ENABLE, RCO,  syn_RCO, LOAD,  syn_LOAD;
-wire [3:0] D, Q,  syn_Q;
+wire RESET, ENABLE, RCO;
+wire [7:0] LOAD;
+wire [31:0] D, Q;
 wire [1:0] MODO;
 
 counters_tb tb(
@@ -33,11 +32,6 @@ counters_tb tb(
 .ENABLE     (ENABLE),                // generated from driver
 .D          (D),                     // generated from driver
 .MODO       (MODO),                  // generated from driver
-
-.syn_RCO     (syn_RCO),              // from synth model, to compare, analyze or monitor
-.syn_LOAD    (syn_LOAD),             // from synth model, to compare, analyze or monitor
-.syn_Q       (syn_Q),                // from synth model, to compare, analyze or monitor
-
 //INPUTS
 .Q          (Q),
 .RCO        (RCO),
