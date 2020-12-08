@@ -1,0 +1,17 @@
+cdlInKeys = list(nil
+    'searchPath             "NAND3.cdl"
+    'cdlFile                "/home/bran/Documentos/repositories/Design_process/Electric/NAND3.cdl"
+    'userSkillFile          ""
+    'opusLib                ""
+    'primaryCell            "NAND3"
+    'caseSensitivity        "lower"
+    'hierarchy              "flatten"
+    'cellTable              ""
+    'viewName               "netlist"
+    'viewType               ""
+    'pr                     nil
+    'skipDevice             nil
+    'schemaLib              "sample"
+    'refLib                 ""
+    'globalNodeExpand       "full"
+)

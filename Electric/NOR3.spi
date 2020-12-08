@@ -1,0 +1,25 @@
+*** SPICE deck for cell NOR3{lay} from library gates
+*** Created on mar dic 08, 2020 11:12:20
+*** Last revised on mar dic 08, 2020 16:15:09
+*** Written on mar dic 08, 2020 16:15:13 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** TOP LEVEL CELL: NOR3{lay}
+Mnmos@3 gnd A Y_NOR3 gnd N L=1U W=1U AS=1.44P AD=3.653P PS=4.6U PD=9.733U
+Mnmos@4 Y_NOR3 B gnd gnd N L=1U W=1U AS=3.653P AD=1.44P PS=9.733U PD=4.6U
+Mnmos@5 gnd C Y_NOR3 gnd N L=1U W=1U AS=1.44P AD=3.653P PS=4.6U PD=9.733U
+Mpmos@3 net@98 A Y_NOR3 vdd P L=1U W=2U AS=1.44P AD=1.38P PS=4.6U PD=5.2U
+Mpmos@8 net@99 B net@98 vdd P L=1U W=2U AS=1.38P AD=1.38P PS=5.2U PD=5.2U
+Mpmos@9 vdd C net@99 vdd P L=1U W=2U AS=1.38P AD=24.4P PS=5.2U PD=30.8U
+
+* Spice Code nodes in cell cell 'NOR3{lay}'
+vdd VDD 0 DC 5
+vin A 0 pulse(0 5 10n 0.5n 0.5n 20n)
+vin2 B 0 pulse(0 5 20n 0.5n 0.5n 30n)
+vin3 C 0 pulse(0 5 30n 0.5n 0.5n 40n)
+.TRAN 0 80n
+.MODEL N NMOS
+.MODEL P PMOS
+.end
+.END

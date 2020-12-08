@@ -1,0 +1,115 @@
+* XSpice netlist created from SPICE and liberty sources by spi2xspice.py
+*SPICE netlist created from BLIF module counter_4b by blif2BSpice
+.subckt counter_4b a_vdd a_gnd a_ENABLE a_RESET a_clk a_D_0_ a_D_1_ a_D_2_ a_D_3_ a_MODO_0_ a_MODO_1_ a_Q_0_ a_Q_1_ a_Q_2_ a_Q_3_ a_RCO a_LOAD
+AINVX1_1 [RESET] _2_ d_lut_INVX1
+ANAND2X1_1 [ENABLE _2_] _3_ d_lut_NAND2X1
+AINVX1_2 [MODO_0_] _4_ d_lut_INVX1
+AINVX1_3 [MODO_1_] _5_ d_lut_INVX1
+ANOR2X1_1 [_4_ _5_] _6_ d_lut_NOR2X1
+AINVX1_4 [_6_] _7_ d_lut_INVX1
+ANOR2X1_2 [_3_ _7_] _0_ d_lut_NOR2X1
+ANAND2X1_2 [D_0_ _6_] _8_ d_lut_NAND2X1
+AINVX1_5 [_42__0_] _9_ d_lut_INVX1
+AOAI21X1_1 [_4_ _5_ _9_] _10_ d_lut_OAI21X1
+AAOI21X1_1 [_8_ _10_ _3_] _1__0_ d_lut_AOI21X1
+ANOR2X1_3 [MODO_1_ _4_] _11_ d_lut_NOR2X1
+ANAND2X1_3 [_42__0_ _42__1_] _12_ d_lut_NAND2X1
+AINVX1_6 [_12_] _13_ d_lut_INVX1
+ANOR2X1_4 [_42__0_ _42__1_] _14_ d_lut_NOR2X1
+ANOR2X1_5 [_14_ _13_] _15_ d_lut_NOR2X1
+AAOI21X1_2 [_15_ MODO_0_ _3_] _16_ d_lut_AOI21X1
+AOAI21X1_2 [_11_ _15_ _16_] _17_ d_lut_OAI21X1
+ANAND2X1_4 [D_1_ _0_] _18_ d_lut_NAND2X1
+ANAND2X1_5 [_18_ _17_] _1__1_ d_lut_NAND2X1
+ANOR2X1_6 [MODO_0_ MODO_1_] _19_ d_lut_NOR2X1
+ANAND3X1_1 [_42__0_ _42__1_ _42__2_] _20_ d_lut_NAND3X1
+AINVX1_7 [_42__1_] _21_ d_lut_INVX1
+AINVX1_8 [_42__2_] _22_ d_lut_INVX1
+AOAI21X1_3 [_9_ _21_ _22_] _23_ d_lut_OAI21X1
+ANAND2X1_6 [_20_ _23_] _24_ d_lut_NAND2X1
+AOAI21X1_4 [MODO_0_ _5_ _24_] _25_ d_lut_OAI21X1
+AOAI21X1_5 [_19_ _24_ _25_] _26_ d_lut_OAI21X1
+ANAND3X1_2 [_9_ _21_ _22_] _27_ d_lut_NAND3X1
+AOAI21X1_6 [_42__0_ _42__1_ _42__2_] _28_ d_lut_OAI21X1
+ANAND2X1_7 [_28_ _27_] _29_ d_lut_NAND2X1
+AAOI22X1_1 [D_2_ _6_ _29_ _11_] _30_ d_lut_AOI22X1
+AAOI21X1_3 [_26_ _30_ _3_] _1__2_ d_lut_AOI21X1
+AXNOR2X1_1 [_20_ _42__3_] _31_ d_lut_XNOR2X1
+AAOI22X1_2 [D_3_ _6_ _31_ _19_] _32_ d_lut_AOI22X1
+ANAND2X1_8 [_42__3_ _27_] _33_ d_lut_NAND2X1
+AINVX1_9 [_42__3_] _34_ d_lut_INVX1
+ANAND3X1_3 [_22_ _34_ _14_] _35_ d_lut_NAND3X1
+ANAND2X1_9 [_35_ _33_] _36_ d_lut_NAND2X1
+ANAND3X1_4 [_42__3_ _22_ _12_] _37_ d_lut_NAND3X1
+ANAND2X1_10 [MODO_1_ _4_] _38_ d_lut_NAND2X1
+AAOI21X1_4 [_23_ _34_ _38_] _39_ d_lut_AOI21X1
+AAOI22X1_3 [_37_ _39_ _36_ _11_] _40_ d_lut_AOI22X1
+AAOI21X1_5 [_40_ _32_ _3_] _1__3_ d_lut_AOI21X1
+ABUFX2_1 [_41_] LOAD d_lut_BUFX2
+ABUFX2_2 [_42__0_] Q_0_ d_lut_BUFX2
+ABUFX2_3 [_42__1_] Q_1_ d_lut_BUFX2
+ABUFX2_4 [_42__2_] Q_2_ d_lut_BUFX2
+ABUFX2_5 [_42__3_] Q_3_ d_lut_BUFX2
+ABUFX2_6 [gnd] RCO d_lut_BUFX2
+ADFFPOSX1_1 _1__0_ clk NULL NULL _42__0_ NULL ddflop
+ADFFPOSX1_2 _1__1_ clk NULL NULL _42__1_ NULL ddflop
+ADFFPOSX1_3 _1__2_ clk NULL NULL _42__2_ NULL ddflop
+ADFFPOSX1_4 _1__3_ clk NULL NULL _42__3_ NULL ddflop
+ADFFPOSX1_5 _0_ clk NULL NULL _41_ NULL ddflop
+
+.model todig_3v adc_bridge(in_high=2.0 in_low=1.0 rise_delay=10n fall_delay=10n)
+.model toana_3v dac_bridge(out_high=3.0 out_low=0.0)
+
+.model ddflop d_dff(ic=0 rise_delay=1n fall_delay=1n)
+.model dzero d_pulldown(load=1p)
+.model done d_pullup(load=1p)
+
+AA2D1 [a_gnd] [gnd] todig_3v
+AA2D2 [a_ENABLE] [ENABLE] todig_3v
+AA2D3 [a_RESET] [RESET] todig_3v
+AA2D4 [a_clk] [clk] todig_3v
+AA2D5 [a_D_0_] [D_0_] todig_3v
+AA2D6 [a_D_1_] [D_1_] todig_3v
+AA2D7 [a_D_2_] [D_2_] todig_3v
+AA2D8 [a_D_3_] [D_3_] todig_3v
+AA2D9 [a_MODO_0_] [MODO_0_] todig_3v
+AA2D10 [a_MODO_1_] [MODO_1_] todig_3v
+AD2A1 [Q_0_] [a_Q_0_] toana_3v
+AD2A2 [Q_1_] [a_Q_1_] toana_3v
+AD2A3 [Q_2_] [a_Q_2_] toana_3v
+AD2A4 [Q_3_] [a_Q_3_] toana_3v
+AD2A5 [RCO] [a_RCO] toana_3v
+AD2A6 [LOAD] [a_LOAD] toana_3v
+
+.ends counter_4b
+ 
+
+* INVX1 (!A)
+.model d_lut_INVX1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "10")
+* NAND2X1 (!(A B))
+.model d_lut_NAND2X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "1110")
+* NOR2X1 (!(A+B))
+.model d_lut_NOR2X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "1000")
+* OAI21X1 (!((A+B) C))
+.model d_lut_OAI21X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "11111000")
+* AOI21X1 (!((A B)+C))
+.model d_lut_AOI21X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "11100000")
+* NAND3X1 (!((A B) C))
+.model d_lut_NAND3X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "11111110")
+* AOI22X1 (!((A B)+(C D)))
+.model d_lut_AOI22X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "1110111011100000")
+* XNOR2X1 (!(A^B))
+.model d_lut_XNOR2X1 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "1001")
+* BUFX2 A
+.model d_lut_BUFX2 d_lut (rise_delay=1n fall_delay=1n input_load=10f
++ table_values "01")
+* DFFPOSX1 DS0000
+.end

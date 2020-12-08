@@ -14,7 +14,7 @@
 `include "./src/counter_4b.v"
 
 
-module contador(
+module  counter(
   // inputs
   input wire ENABLE, RESET, clk,
   input wire [31:0]  D,
@@ -113,7 +113,7 @@ end
 
 ////////////////// 8 4-bit counter submodules are instantiated /////////
 
-contador_4b cont4b_0(
+ counter_4b cont4b_0(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -125,7 +125,7 @@ contador_4b cont4b_0(
 );
 
 
-contador_4b cont4b_1(
+ counter_4b cont4b_1(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -137,7 +137,7 @@ contador_4b cont4b_1(
 );
 
 
-contador_4b cont4b_2(
+ counter_4b cont4b_2(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -150,7 +150,7 @@ contador_4b cont4b_2(
 
 
 
-contador_4b cont4b_3(
+ counter_4b cont4b_3(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -163,7 +163,7 @@ contador_4b cont4b_3(
 
 
 
-contador_4b cont4b_4(
+ counter_4b cont4b_4(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -177,7 +177,7 @@ contador_4b cont4b_4(
 
 
 
-contador_4b cont4b_5(
+ counter_4b cont4b_5(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -190,7 +190,7 @@ contador_4b cont4b_5(
 
 
 
-contador_4b cont4b_6(
+ counter_4b cont4b_6(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),
@@ -202,7 +202,7 @@ contador_4b cont4b_6(
 );
 
 
-contador_4b cont4b_7(
+ counter_4b cont4b_7(
   .clk        (   clk       ),
   .RESET      (   RESET     ),
   .ENABLE     (   ENABLE    ),

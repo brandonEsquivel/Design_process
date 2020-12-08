@@ -1,0 +1,2299 @@
+Running yosys for verilog parsing and synthesis
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2016  Clifford Wolf <clifford@clifford.at>           |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.7 (git sha1 61f6811, gcc 6.2.0-11ubuntu1 -O2 -fdebug-prefix-map=/build/yosys-OIL3SR/yosys-0.7=. -fstack-protector-strong -fPIC -Os)
+
+
+-- Executing script file `counter_4b.ys' --
+
+1. Executing Liberty frontend.
+Imported 39 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend.
+Parsing Verilog input from `counter_4b.v' to AST representation.
+Generating RTLIL representation for module `\counter_4b'.
+Successfully finished Verilog frontend.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \counter_4b
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \counter_4b
+Removed 0 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$counter_4b.v:42$3 in module counter_4b.
+Removed a total of 1 dead cases.
+
+3.2.3. Executing PROC_INIT pass (extract init attributes).
+
+3.2.4. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\counter_4b.$proc$counter_4b.v:42$3'.
+     1/3: $0\LOAD[0:0]
+     2/3: $1\RCO[0:0]
+     3/3: $0\Q[3:0]
+Creating decoders for process `\counter_4b.$proc$counter_4b.v:35$2'.
+     1/1: $0\RCO[0:0]
+Creating decoders for process `\counter_4b.$proc$counter_4b.v:31$1'.
+     1/1: $0\MODO_reg[1:0]
+
+3.2.6. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\counter_4b.\MODO_reg' from process `\counter_4b.$proc$counter_4b.v:31$1'.
+
+3.2.7. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\counter_4b.\Q' using process `\counter_4b.$proc$counter_4b.v:42$3'.
+  created $dff cell `$procdff$75' with positive edge clock.
+Creating register for signal `\counter_4b.\RCO' using process `\counter_4b.$proc$counter_4b.v:42$3'.
+  created $dff cell `$procdff$76' with positive edge clock.
+Creating register for signal `\counter_4b.\LOAD' using process `\counter_4b.$proc$counter_4b.v:42$3'.
+  created $dff cell `$procdff$77' with positive edge clock.
+Creating register for signal `\counter_4b.\RCO' using process `\counter_4b.$proc$counter_4b.v:35$2'.
+  created $dff cell `$procdff$78' with negative edge clock.
+
+3.2.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 6 empty switches in `\counter_4b.$proc$counter_4b.v:42$3'.
+Removing empty process `counter_4b.$proc$counter_4b.v:42$3'.
+Found and cleaned up 1 empty switch in `\counter_4b.$proc$counter_4b.v:35$2'.
+Removing empty process `counter_4b.$proc$counter_4b.v:35$2'.
+Removing empty process `counter_4b.$proc$counter_4b.v:31$1'.
+Cleaned up 7 empty switches.
+
+3.3. Executing OPT_EXPR pass (perform const folding).
+Replacing $eq cell `$eq$counter_4b.v:63$9' in module `counter_4b' with $logic_not.
+Replacing $eq cell `$procmux$20_CMP0' in module `counter_4b' with $logic_not.
+Replacing $eq cell `$procmux$38_CMP0' in module `counter_4b' with $logic_not.
+Replacing $eq cell `$procmux$58_CMP0' in module `counter_4b' with $logic_not.
+
+3.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.5. Executing CHECK pass (checking for obvious problems).
+checking module counter_4b..
+Warning: multiple conflicting drivers for counter_4b.\RCO:
+    port Q[0] of cell $procdff$76 ($dff)
+    port Q[0] of cell $procdff$78 ($dff)
+found and reported 1 problems.
+
+3.6. Executing OPT pass (performing simple optimizations).
+
+3.6.1. Executing OPT_EXPR pass (perform const folding).
+
+3.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+  Cell `$add$counter_4b.v:80$14' is identical to cell `$add$counter_4b.v:77$13'.
+    Redirecting output \Y: $add$counter_4b.v:80$14_Y = $add$counter_4b.v:77$13_Y
+    Removing $add cell `$add$counter_4b.v:80$14' from module `\counter_4b'.
+  Cell `$procmux$34_CMP0' is identical to cell `$procmux$17_CMP0'.
+    Redirecting output \Y: $procmux$34_CMP = $procmux$17_CMP
+    Removing $eq cell `$procmux$34_CMP0' from module `\counter_4b'.
+  Cell `$procmux$38_CMP0' is identical to cell `$procmux$20_CMP0'.
+    Redirecting output \Y: $procmux$38_CMP = $procmux$20_CMP
+    Removing $logic_not cell `$procmux$38_CMP0' from module `\counter_4b'.
+  Cell `$procmux$42_CMP0' is identical to cell `$procmux$23_CMP0'.
+    Redirecting output \Y: $procmux$42_CMP = $procmux$23_CMP
+    Removing $eq cell `$procmux$42_CMP0' from module `\counter_4b'.
+  Cell `$procmux$46_CMP0' is identical to cell `$procmux$26_CMP0'.
+    Redirecting output \Y: $procmux$46_CMP = $procmux$26_CMP
+    Removing $eq cell `$procmux$46_CMP0' from module `\counter_4b'.
+  Cell `$procmux$54_CMP0' is identical to cell `$procmux$17_CMP0'.
+    Redirecting output \Y: $procmux$54_CMP = $procmux$17_CMP
+    Removing $eq cell `$procmux$54_CMP0' from module `\counter_4b'.
+  Cell `$procmux$58_CMP0' is identical to cell `$procmux$20_CMP0'.
+    Redirecting output \Y: $procmux$58_CMP = $procmux$20_CMP
+    Removing $logic_not cell `$procmux$58_CMP0' from module `\counter_4b'.
+  Cell `$procmux$62_CMP0' is identical to cell `$procmux$23_CMP0'.
+    Redirecting output \Y: $procmux$62_CMP = $procmux$23_CMP
+    Removing $eq cell `$procmux$62_CMP0' from module `\counter_4b'.
+  Cell `$procmux$66_CMP0' is identical to cell `$procmux$26_CMP0'.
+    Redirecting output \Y: $procmux$66_CMP = $procmux$26_CMP
+    Removing $eq cell `$procmux$66_CMP0' from module `\counter_4b'.
+  Cell `$sub$counter_4b.v:56$8' is identical to cell `$sub$counter_4b.v:53$7'.
+    Redirecting output \Y: $sub$counter_4b.v:56$8_Y = $sub$counter_4b.v:53$7_Y
+    Removing $sub cell `$sub$counter_4b.v:56$8' from module `\counter_4b'.
+  Cell `$sub$counter_4b.v:68$11' is identical to cell `$sub$counter_4b.v:65$10'.
+    Redirecting output \Y: $sub$counter_4b.v:68$11_Y = $sub$counter_4b.v:65$10_Y
+    Removing $sub cell `$sub$counter_4b.v:68$11' from module `\counter_4b'.
+Removed a total of 11 cells.
+
+3.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+    Root of a mux tree: $procmux$30 (pure)
+    Root of a mux tree: $procmux$50 (pure)
+    Root of a mux tree: $procmux$70 (pure)
+    Root of a mux tree: $procmux$73 (pure)
+      Replacing known input bits on port A of cell $procmux$73: \RCO -> 1'0
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+
+3.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+    New ctrl vector for $pmux cell $procmux$16: { $auto$opt_reduce.cc:132:opt_mux$80 $procmux$17_CMP }
+    New ctrl vector for $mux cell $procmux$56: { }
+    New ctrl vector for $mux cell $procmux$60: { }
+    New ctrl vector for $mux cell $procmux$64: { }
+    New ctrl vector for $mux cell $procmux$73: { }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$79: { $procmux$20_CMP $procmux$23_CMP $procmux$26_CMP }
+  Optimizing cells in module \counter_4b.
+Performed a total of 6 changes.
+
+3.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.6.6. Executing OPT_RMDFF pass (remove dff with constant values).
+Removing $procdff$78 ($dff) from module counter_4b.
+Replaced 1 DFF cells.
+
+3.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+  removing unused `$eq' cell `$eq$counter_4b.v:51$4'.
+  removing unused `$lt' cell `$lt$counter_4b.v:51$5'.
+  removing unused `$logic_or' cell `$logic_or$counter_4b.v:51$6'.
+  removing unused `$logic_not' cell `$eq$counter_4b.v:63$9'.
+  removing unused `$eq' cell `$eq$counter_4b.v:75$12'.
+  removing unused `$pmux' cell `$procmux$33'.
+  removing unused `$mux' cell `$procmux$36'.
+  removing unused `$mux' cell `$procmux$40'.
+  removing unused `$mux' cell `$procmux$44'.
+  removing unused `$mux' cell `$procmux$47'.
+  removing unused `$mux' cell `$procmux$50'.
+  removing unused `$dff' cell `$procdff$76'.
+
+3.6.8. Executing OPT_EXPR pass (perform const folding).
+
+3.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+    Root of a mux tree: $procmux$30 (pure)
+    Root of a mux tree: $procmux$70 (pure)
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+
+3.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+Performed a total of 0 changes.
+
+3.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.6.13. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.6.15. Executing OPT_EXPR pass (perform const folding).
+
+3.6.16. Finished OPT passes. (There is nothing left to do.)
+
+3.7. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 4) from port B of cell counter_4b.$sub$counter_4b.v:53$7 ($sub).
+Removed top 3 bits (of 4) from port B of cell counter_4b.$sub$counter_4b.v:65$10 ($sub).
+Removed top 3 bits (of 4) from port B of cell counter_4b.$add$counter_4b.v:77$13 ($add).
+Removed top 1 bits (of 2) from port B of cell counter_4b.$procmux$23_CMP0 ($eq).
+
+3.8. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module counter_4b:
+  creating $macc model for $add$counter_4b.v:77$13 ($add).
+  creating $macc model for $sub$counter_4b.v:53$7 ($sub).
+  creating $macc model for $sub$counter_4b.v:65$10 ($sub).
+  creating $alu model for $macc $sub$counter_4b.v:65$10.
+  creating $alu model for $macc $sub$counter_4b.v:53$7.
+  creating $alu model for $macc $add$counter_4b.v:77$13.
+  creating $alu cell for $add$counter_4b.v:77$13: $auto$alumacc.cc:470:replace_alu$81
+  creating $alu cell for $sub$counter_4b.v:53$7: $auto$alumacc.cc:470:replace_alu$84
+  creating $alu cell for $sub$counter_4b.v:65$10: $auto$alumacc.cc:470:replace_alu$87
+  created 3 $alu and 0 $macc cells.
+
+3.9. Executing SHARE pass (SAT-based resource sharing).
+
+3.10. Executing OPT pass (performing simple optimizations).
+
+3.10.1. Executing OPT_EXPR pass (perform const folding).
+
+3.10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+    Root of a mux tree: $procmux$30 (pure)
+    Root of a mux tree: $procmux$70 (pure)
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+
+3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+Performed a total of 0 changes.
+
+3.10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.10.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.10.8. Executing OPT_EXPR pass (perform const folding).
+
+3.10.9. Finished OPT passes. (There is nothing left to do.)
+
+3.11. Executing FSM pass (extract and optimize FSM).
+
+3.11.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.11.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.11.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.11.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.11.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.11.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.11.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.12. Executing OPT pass (performing simple optimizations).
+
+3.12.1. Executing OPT_EXPR pass (perform const folding).
+
+3.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.12.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.12.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.12.5. Finished fast OPT passes.
+
+3.13. Executing MEMORY pass.
+
+3.13.1. Executing MEMORY_DFF pass (merging $dff cells to $memrd and $memwr).
+
+3.13.2. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.13.3. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.13.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.13.5. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.15. Executing OPT pass (performing simple optimizations).
+
+3.15.1. Executing OPT_EXPR pass (perform const folding).
+Replacing $mux cell `$procmux$27' in module `counter_4b' with and-gate.
+
+3.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.15.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.15.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.15.5. Finished fast OPT passes.
+
+3.16. Executing MEMORY_MAP pass (converting $mem cells to logic and flip-flops).
+
+3.17. Executing OPT pass (performing simple optimizations).
+
+3.17.1. Executing OPT_EXPR pass (perform const folding).
+
+3.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.17.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+    Root of a mux tree: $procmux$16 (pure)
+    Root of a mux tree: $procmux$30 (pure)
+    Root of a mux tree: $procmux$70 (pure)
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+
+3.17.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+Performed a total of 0 changes.
+
+3.17.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+3.17.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.17.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.17.8. Executing OPT_EXPR pass (perform const folding).
+
+3.17.9. Finished OPT passes. (There is nothing left to do.)
+
+3.18. Executing TECHMAP pass (map to technology primitives).
+
+3.18.1. Executing Verilog-2005 frontend.
+Parsing Verilog input from `<techmap.v>' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+3.18.2. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_alu'.
+Parameter \A_SIGNED = 0
+Parameter \B_SIGNED = 0
+Parameter \A_WIDTH = 4
+Parameter \B_WIDTH = 1
+Parameter \Y_WIDTH = 4
+Generating RTLIL representation for module `$paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=4\B_WIDTH=1\Y_WIDTH=4'.
+
+3.18.3. Continuing TECHMAP pass.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$87 using $paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=4\B_WIDTH=1\Y_WIDTH=4.
+Mapping counter_4b.$auto$opt_reduce.cc:126:opt_mux$79 ($reduce_or) with simplemap.
+Mapping counter_4b.$procmux$17_CMP0 ($eq) with simplemap.
+
+3.18.4. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_pmux'.
+Parameter \WIDTH = 1
+Parameter \S_WIDTH = 2
+Generating RTLIL representation for module `$paramod\_90_pmux\WIDTH=1\S_WIDTH=2'.
+
+3.18.5. Continuing TECHMAP pass.
+Mapping counter_4b.$procmux$16 using $paramod\_90_pmux\WIDTH=1\S_WIDTH=2.
+Mapping counter_4b.$procmux$20_CMP0 ($logic_not) with simplemap.
+Mapping counter_4b.$procmux$23_CMP0 ($eq) with simplemap.
+Mapping counter_4b.$procmux$26_CMP0 ($eq) with simplemap.
+Mapping counter_4b.$procmux$27 ($and) with simplemap.
+Mapping counter_4b.$procmux$30 ($mux) with simplemap.
+
+3.18.6. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_alu'.
+Parameter \A_SIGNED = 0
+Parameter \B_SIGNED = 0
+Parameter \A_WIDTH = 4
+Parameter \B_WIDTH = 2
+Parameter \Y_WIDTH = 4
+Generating RTLIL representation for module `$paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=4\B_WIDTH=2\Y_WIDTH=4'.
+
+3.18.7. Continuing TECHMAP pass.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$84 using $paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=4\B_WIDTH=2\Y_WIDTH=4.
+
+3.18.8. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_alu'.
+Parameter \A_SIGNED = 0
+Parameter \B_SIGNED = 0
+Parameter \A_WIDTH = 1
+Parameter \B_WIDTH = 4
+Parameter \Y_WIDTH = 4
+Generating RTLIL representation for module `$paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=1\B_WIDTH=4\Y_WIDTH=4'.
+
+3.18.9. Continuing TECHMAP pass.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$81 using $paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=1\B_WIDTH=4\Y_WIDTH=4.
+
+3.18.10. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_pmux'.
+Parameter \WIDTH = 4
+Parameter \S_WIDTH = 4
+Generating RTLIL representation for module `$paramod\_90_pmux\WIDTH=4\S_WIDTH=4'.
+
+3.18.11. Continuing TECHMAP pass.
+Mapping counter_4b.$procmux$53 using $paramod\_90_pmux\WIDTH=4\S_WIDTH=4.
+Mapping counter_4b.$procmux$67 ($mux) with simplemap.
+Mapping counter_4b.$procmux$70 ($mux) with simplemap.
+Mapping counter_4b.$procdff$75 ($dff) with simplemap.
+Mapping counter_4b.$procdff$77 ($dff) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:262$137 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:263$138 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.$and$<techmap.v>:260$136 ($and) with simplemap.
+
+3.18.12. Executing AST frontend in derive mode using pre-parsed AST for module `\_90_lcu'.
+Parameter \WIDTH = 4
+Generating RTLIL representation for module `$paramod\_90_lcu\WIDTH=4'.
+
+3.18.13. Executing PROC pass (convert processes to netlists).
+
+3.18.13.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.18.13.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.18.13.3. Executing PROC_INIT pass (extract init attributes).
+
+3.18.13.4. Executing PROC_ARST pass (detect async resets in processes).
+
+3.18.13.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\_90_lcu\WIDTH=4.$proc$<techmap.v>:207$237'.
+     1/8: $0\p[3:0] [2]
+     2/8: $0\g[3:0] [2]
+     3/8: $0\p[3:0] [3]
+     4/8: $0\g[3:0] [3]
+     5/8: $0\p[3:0] [1]
+     6/8: $0\g[3:0] [1]
+     7/8: $0\g[3:0] [0]
+     8/8: $0\p[3:0] [0]
+
+3.18.13.6. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\_90_lcu\WIDTH=4.\g' from process `$paramod\_90_lcu\WIDTH=4.$proc$<techmap.v>:207$237'.
+No latch inferred for signal `$paramod\_90_lcu\WIDTH=4.\p' from process `$paramod\_90_lcu\WIDTH=4.$proc$<techmap.v>:207$237'.
+
+3.18.13.7. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.18.13.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod\_90_lcu\WIDTH=4.$proc$<techmap.v>:207$237'.
+Cleaned up 0 empty switches.
+
+3.18.14. Executing OPT pass (performing simple optimizations).
+
+3.18.14.1. Executing OPT_EXPR pass (perform const folding).
+
+3.18.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\_90_lcu\WIDTH=4'.
+Removed a total of 0 cells.
+
+3.18.14.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.18.14.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\_90_lcu\WIDTH=4..
+  removing unused `$and' cell `$and$<techmap.v>:222$242'.
+  removing unused `$and' cell `$and$<techmap.v>:222$248'.
+  removing unused `$and' cell `$and$<techmap.v>:230$251'.
+  removing unused non-port wire \j.
+  removing unused non-port wire \i.
+  removed 2 unused temporary wires.
+
+3.18.14.5. Finished fast OPT passes.
+
+3.18.15. Continuing TECHMAP pass.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$87.lcu using $paramod\_90_lcu\WIDTH=4.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.$ternary$<techmap.v>:258$135 ($mux) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.$not$<techmap.v>:258$134 ($not) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$87.B_conv ($pos) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$87.A_conv ($pos) with simplemap.
+Mapping counter_4b.$techmap$procmux$16.$and$<techmap.v>:434$156 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$16.$reduce_or$<techmap.v>:441$157 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$procmux$16.$and$<techmap.v>:434$155 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$16.$ternary$<techmap.v>:445$154 ($mux) with simplemap.
+Mapping counter_4b.$techmap$procmux$16.$reduce_or$<techmap.v>:445$153 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:262$186 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:263$187 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.$and$<techmap.v>:260$185 ($and) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$84.lcu using $paramod\_90_lcu\WIDTH=4.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.$ternary$<techmap.v>:258$184 ($mux) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.$not$<techmap.v>:258$183 ($not) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$84.B_conv ($pos) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$84.A_conv ($pos) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:263$192 ($xor) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.$and$<techmap.v>:260$190 ($and) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$81.lcu using $paramod\_90_lcu\WIDTH=4.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.$ternary$<techmap.v>:258$189 ($mux) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.$not$<techmap.v>:258$188 ($not) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$81.B_conv ($pos) with simplemap.
+Mapping counter_4b.$auto$alumacc.cc:470:replace_alu$81.A_conv ($pos) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$reduce_or$<techmap.v>:441$201 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$reduce_or$<techmap.v>:441$202 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$reduce_or$<techmap.v>:441$200 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$reduce_or$<techmap.v>:441$199 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$and$<techmap.v>:434$198 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$and$<techmap.v>:434$197 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$and$<techmap.v>:434$196 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$and$<techmap.v>:434$195 ($and) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$ternary$<techmap.v>:445$194 ($mux) with simplemap.
+Mapping counter_4b.$techmap$procmux$53.$reduce_or$<techmap.v>:445$193 ($reduce_or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:229$250 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:221$247 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:221$244 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:221$241 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:212$239 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:229$249 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:222$245 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:221$246 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:221$243 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:212$238 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:221$240 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:212$238 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$240 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$243 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$246 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:222$245 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:229$249 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:212$239 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:221$241 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:221$244 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:221$247 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:229$250 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:212$238 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$240 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$243 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$246 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:222$245 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:229$249 ($and) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:212$239 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:221$241 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:221$244 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:221$247 ($or) with simplemap.
+Mapping counter_4b.$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:229$250 ($or) with simplemap.
+No more expansions possible.
+
+3.19. Executing OPT pass (performing simple optimizations).
+
+3.19.1. Executing OPT_EXPR pass (perform const folding).
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$256' (1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$not$<techmap.v>:258$134_Y [0] = 1'0'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$252' (101) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$ternary$<techmap.v>:258$135_Y [0] = 1'0'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$216' (?0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:262$137_Y [0] = \Q [0]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$164' (?0) in module `\counter_4b' with constant driver `$auto$simplemap.cc:250:simplemap_eqne$161 [1] = \MODO [1]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$173' (?0) in module `\counter_4b' with constant driver `$auto$simplemap.cc:250:simplemap_eqne$171 [0] = \MODO [0]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$260' (const_and) in module `\counter_4b' with constant driver `$techmap$procmux$16.$and$<techmap.v>:434$156_Y = 1'0'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$263' (1?) in module `\counter_4b' with constant driver `$techmap$procmux$16.$and$<techmap.v>:434$155_Y = $procmux$17_CMP'.
+Replacing $_OR_ cell `$auto$simplemap.cc:136:simplemap_reduce$262' (?0) in module `\counter_4b' with constant driver `$techmap$procmux$16.$reduce_or$<techmap.v>:441$157_Y = $procmux$17_CMP'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$301' (??0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$ternary$<techmap.v>:258$189_Y [0] = \Q [0]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$292' (?0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:263$192_Y [0] = $techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191_Y [0]'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$284' (1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$not$<techmap.v>:258$183_Y [0] = 1'0'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$280' (101) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$ternary$<techmap.v>:258$184_Y [0] = 1'0'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$267' (?0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:262$186_Y [0] = \Q [0]'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$302' (??0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$ternary$<techmap.v>:258$189_Y [1] = \Q [1]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$289' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191_Y [1] = \Q [1]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$297' (1?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$and$<techmap.v>:260$190_Y [0] = \Q [0]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$376' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:212$238_Y = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$382' (?0) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$83 [0] = \Q [0]'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$285' (1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$not$<techmap.v>:258$183_Y [1] = 1'0'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$281' (101) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$ternary$<techmap.v>:258$184_Y [1] = 1'0'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$268' (?0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:262$186_Y [1] = \Q [1]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$276' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$and$<techmap.v>:260$185_Y [0] = 1'0'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$365' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:212$238_Y = \Q [0]'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$371' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$86 [0] = \Q [0]'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$257' (0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$not$<techmap.v>:258$134_Y [1] = 1'1'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$253' (011) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$ternary$<techmap.v>:258$135_Y [1] = 1'1'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$225' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$and$<techmap.v>:260$136_Y [0] = 1'0'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$363' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:212$238_Y = \Q [0]'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$358' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$89 [0] = \Q [0]'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$303' (??0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$ternary$<techmap.v>:258$189_Y [2] = \Q [2]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$290' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191_Y [2] = \Q [2]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$298' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$and$<techmap.v>:260$190_Y [1] = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$383' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$83 [1] = $techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$240_Y'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$286' (0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$not$<techmap.v>:258$183_Y [2] = 1'1'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$282' (011) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$ternary$<techmap.v>:258$184_Y [2] = 1'1'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$277' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$and$<techmap.v>:260$185_Y [1] = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$372' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$86 [1] = $techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$240_Y'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$258' (0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$not$<techmap.v>:258$134_Y [2] = 1'1'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$254' (011) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$ternary$<techmap.v>:258$135_Y [2] = 1'1'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$226' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$and$<techmap.v>:260$136_Y [1] = \Q [1]'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$304' (??0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$ternary$<techmap.v>:258$189_Y [3] = \Q [3]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$291' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191_Y [3] = \Q [3]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$299' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$and$<techmap.v>:260$190_Y [2] = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$386' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$83 [2] = $techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:229$249_Y'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$287' (0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$not$<techmap.v>:258$183_Y [3] = 1'1'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$283' (011) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$ternary$<techmap.v>:258$184_Y [3] = 1'1'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$278' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$and$<techmap.v>:260$185_Y [2] = \Q [2]'.
+Replacing $_NOT_ cell `$auto$simplemap.cc:37:simplemap_not$259' (0) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$not$<techmap.v>:258$134_Y [3] = 1'1'.
+Replacing $_MUX_ cell `$auto$simplemap.cc:277:simplemap_mux$255' (011) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$ternary$<techmap.v>:258$135_Y [3] = 1'1'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$227' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$and$<techmap.v>:260$136_Y [2] = \Q [2]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$228' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$and$<techmap.v>:260$136_Y [3] = \Q [3]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$224' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:263$138_Y [4] = $auto$alumacc.cc:484:replace_alu$89 [3]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$279' (?1) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$and$<techmap.v>:260$185_Y [3] = \Q [3]'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$275' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:263$187_Y [4] = $auto$alumacc.cc:484:replace_alu$86 [3]'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$300' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$and$<techmap.v>:260$190_Y [3] = 1'0'.
+Replacing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$378' (const_and) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$243_Y = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$384' (00) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$or$<techmap.v>:221$244_Y = 1'0'.
+Replacing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$385' (0?) in module `\counter_4b' with constant driver `$auto$alumacc.cc:484:replace_alu$83 [3] = $techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$246_Y'.
+Replacing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$296' (0?) in module `\counter_4b' with constant driver `$techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:263$192_Y [4] = $techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$246_Y'.
+
+3.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$220' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$271'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:263$138_Y [0] = $techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:263$187_Y [0]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$220' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$218' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$269'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:262$137_Y [2] = $techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:262$186_Y [2]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$218' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$293' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$272'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:263$192_Y [1] = $techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:263$187_Y [1]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$293' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$145' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$163'.
+    Redirecting output \Y: $auto$simplemap.cc:250:simplemap_eqne$143 [0] = $auto$simplemap.cc:250:simplemap_eqne$161 [0]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$145' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$146' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$174'.
+    Redirecting output \Y: $auto$simplemap.cc:250:simplemap_eqne$143 [1] = $auto$simplemap.cc:250:simplemap_eqne$171 [1]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$146' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:136:simplemap_reduce$140' is identical to cell `$auto$simplemap.cc:136:simplemap_reduce$351'.
+    Redirecting output \Y: $auto$simplemap.cc:127:simplemap_reduce$139 = $auto$simplemap.cc:127:simplemap_reduce$349 [1]
+    Removing $_OR_ cell `$auto$simplemap.cc:136:simplemap_reduce$140' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$377' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$366'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$81.lcu.$and$<techmap.v>:221$240_Y = $techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$240_Y
+    Removing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$377' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$288' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$271'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$81.$xor$<techmap.v>:262$191_Y [0] = $techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:263$187_Y [0]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$288' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$219' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$270'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$87.$xor$<techmap.v>:262$137_Y [3] = $techmap$auto$alumacc.cc:470:replace_alu$84.$xor$<techmap.v>:262$186_Y [3]
+    Removing $_XOR_ cell `$auto$simplemap.cc:85:simplemap_bitop$219' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$367' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$362'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:221$243_Y = $techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:221$243_Y
+    Removing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$367' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$373' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$356'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$or$<techmap.v>:221$244_Y = $techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$or$<techmap.v>:221$244_Y
+    Removing $_OR_ cell `$auto$simplemap.cc:85:simplemap_bitop$373' from module `\counter_4b'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$369' is identical to cell `$auto$simplemap.cc:85:simplemap_bitop$360'.
+    Redirecting output \Y: $techmap$auto$alumacc.cc:470:replace_alu$84.lcu.$and$<techmap.v>:222$245_Y = $techmap$auto$alumacc.cc:470:replace_alu$87.lcu.$and$<techmap.v>:222$245_Y
+    Removing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$369' from module `\counter_4b'.
+Removed a total of 12 cells.
+
+3.19.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.19.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+  removing unused `$_NOT_' cell `$auto$simplemap.cc:37:simplemap_not$305'.
+  removing unused `$_NOT_' cell `$auto$simplemap.cc:37:simplemap_not$306'.
+  removing unused `$_NOT_' cell `$auto$simplemap.cc:37:simplemap_not$307'.
+  removing unused `$_NOT_' cell `$auto$simplemap.cc:37:simplemap_not$308'.
+  removing unused `$_OR_' cell `$auto$simplemap.cc:85:simplemap_bitop$355'.
+  removing unused `$_OR_' cell `$auto$simplemap.cc:85:simplemap_bitop$356'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$360'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$361'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$362'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$368'.
+  removing unused `$_OR_' cell `$auto$simplemap.cc:85:simplemap_bitop$374'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$379'.
+  removing unused `$_AND_' cell `$auto$simplemap.cc:85:simplemap_bitop$380'.
+
+3.19.5. Finished fast OPT passes.
+
+3.20. Executing ABC pass (technology mapping using ABC).
+
+3.20.1. Extracting gate netlist of module `\counter_4b' to `<abc-temp-dir>/input.blif'..
+Extracted 78 gates and 93 wires to a netlist network with 13 inputs and 5 outputs.
+
+3.20.1.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:              AOI3 cells:        5
+ABC RESULTS:              AOI4 cells:        2
+ABC RESULTS:              NAND cells:        6
+ABC RESULTS:               NOR cells:        6
+ABC RESULTS:               NOT cells:        7
+ABC RESULTS:              OAI3 cells:        8
+ABC RESULTS:              OAI4 cells:        1
+ABC RESULTS:                OR cells:        7
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        7
+ABC RESULTS:        internal signals:       75
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+3.21. Executing OPT pass (performing simple optimizations).
+
+3.21.1. Executing OPT_EXPR pass (perform const folding).
+
+3.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+  Cell `$abc$387$auto$blifparse.cc:286:parse_blif$424' is identical to cell `$abc$387$auto$blifparse.cc:286:parse_blif$423'.
+    Redirecting output \Y: $abc$387$n55 = $abc$387$n54
+    Removing $_XOR_ cell `$abc$387$auto$blifparse.cc:286:parse_blif$424' from module `\counter_4b'.
+Removed a total of 1 cells.
+
+3.21.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+3.21.5. Finished fast OPT passes.
+
+3.22. Executing HIERARCHY pass (managing design hierarchy).
+
+3.22.1. Analyzing design hierarchy..
+Top module:  \counter_4b
+
+3.22.2. Analyzing design hierarchy..
+Top module:  \counter_4b
+Removed 0 unused modules.
+
+3.23. Printing statistics.
+
+=== counter_4b ===
+
+   Number of wires:                 59
+   Number of wire bits:             70
+   Number of public wires:           9
+   Number of public wire bits:      17
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 58
+     $_AND_                          4
+     $_AOI3_                         5
+     $_AOI4_                         2
+     $_DFF_P_                        5
+     $_NAND_                         6
+     $_NOR_                          6
+     $_NOT_                          7
+     $_OAI3_                         8
+     $_OAI4_                         1
+     $_OR_                           7
+     $_XNOR_                         1
+     $_XOR_                          6
+
+3.24. Executing CHECK pass (checking for obvious problems).
+checking module counter_4b..
+found and reported 0 problems.
+
+4. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFFNEGX1 (noninv, pins=3, area=864.00) is a direct match for cell type $_DFF_N_.
+  cell DFFPOSX1 (noninv, pins=3, area=864.00) is a direct match for cell type $_DFF_P_.
+  cell DFFSR (noninv, pins=5, area=1584.00) is a direct match for cell type $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PPN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PNP_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PPP_ from mapping for $_DFFSR_PNP_.
+  create mapping for $_DFFSR_NNN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_NPN_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NNP_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NPP_ from mapping for $_DFFSR_NNP_.
+  create mapping for $_DFF_NN0_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFF_NN1_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFF_NP0_ from mapping for $_DFFSR_NPP_.
+  create mapping for $_DFF_NP1_ from mapping for $_DFFSR_NPP_.
+  create mapping for $_DFF_PN0_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFF_PN1_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFF_PP0_ from mapping for $_DFFSR_PPP_.
+  create mapping for $_DFF_PP1_ from mapping for $_DFFSR_PPP_.
+  final dff cell mappings:
+    DFFNEGX1 _DFF_N_ (.CLK( C), .D( D), .Q( Q));
+    DFFPOSX1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    DFFSR _DFF_NN0_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S( 1));
+    DFFSR _DFF_NN1_ (.CLK(~C), .D( D), .Q( Q), .R( 1), .S( R));
+    DFFSR _DFF_NP0_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S( 1));
+    DFFSR _DFF_NP1_ (.CLK(~C), .D( D), .Q( Q), .R( 1), .S(~R));
+    DFFSR _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .R( R), .S( 1));
+    DFFSR _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .R( 1), .S( R));
+    DFFSR _DFF_PP0_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S( 1));
+    DFFSR _DFF_PP1_ (.CLK( C), .D( D), .Q( Q), .R( 1), .S(~R));
+    DFFSR _DFFSR_NNN_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S( S));
+    DFFSR _DFFSR_NNP_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S( S));
+    DFFSR _DFFSR_NPN_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S(~S));
+    DFFSR _DFFSR_NPP_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S(~S));
+    DFFSR _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .R( R), .S( S));
+    DFFSR _DFFSR_PNP_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S( S));
+    DFFSR _DFFSR_PPN_ (.CLK( C), .D( D), .Q( Q), .R( R), .S(~S));
+    DFFSR _DFFSR_PPP_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S(~S));
+Mapping DFF cells in module `\counter_4b':
+  mapped 5 $_DFF_P_ cells to \DFFPOSX1 cells.
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+Performed a total of 0 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+5.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+
+5.9. Finished OPT passes. (There is nothing left to do.)
+
+6. Executing ABC pass (technology mapping using ABC).
+
+6.1. Extracting gate netlist of module `\counter_4b' to `<abc-temp-dir>/input.blif'..
+Extracted 53 gates and 65 wires to a netlist network with 12 inputs and 5 outputs.
+
+6.1.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu050/osu05_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu05_stdcells" from "/usr/share/qflow/tech/osu050/osu05_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.00 sec
+ABC: Memory =    0.38 MB. Time =     0.00 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.1.2. Re-integrating ABC results.
+ABC RESULTS:           AOI21X1 cells:        5
+ABC RESULTS:           AOI22X1 cells:        3
+ABC RESULTS:             INVX1 cells:        9
+ABC RESULTS:           NAND2X1 cells:       10
+ABC RESULTS:           NAND3X1 cells:        4
+ABC RESULTS:            NOR2X1 cells:        6
+ABC RESULTS:           OAI21X1 cells:        6
+ABC RESULTS:           XNOR2X1 cells:        1
+ABC RESULTS:        internal signals:       48
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+7. Executing FLATTEN pass (flatten design).
+No more expansions possible.
+Removed 0 unused cells and 66 unused wires.
+
+8. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Don't map input port counter_4b.D: Missing option -inpad.
+Don't map input port counter_4b.ENABLE: Missing option -inpad.
+Mapping port counter_4b.LOAD using BUFX2.
+Don't map input port counter_4b.MODO: Missing option -inpad.
+Mapping port counter_4b.Q using BUFX2.
+Mapping port counter_4b.RCO using BUFX2.
+Don't map input port counter_4b.RESET: Missing option -inpad.
+Don't map input port counter_4b.clk: Missing option -inpad.
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_4b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_4b.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_4b'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_4b..
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+
+9.9. Finished OPT passes. (There is nothing left to do.)
+
+10. Executing BLIF backend.
+
+End of script. Logfile hash: 3bd0f904ec
+CPU: user 0.19s system 0.03s, MEM: 38.01 MB total, 10.52 MB resident
+Yosys 0.7 (git sha1 61f6811, gcc 6.2.0-11ubuntu1 -O2 -fdebug-prefix-map=/build/yosys-OIL3SR/yosys-0.7=. -fstack-protector-strong -fPIC -Os)
+Time spent: 16% 1x share (0 sec), 11% 17x opt_expr (0 sec), ...
+Cleaning up output syntax
+Cleaning Up blif file syntax
+Running blifFanout (iterative)
+
+Parsing library "osu05_stdcells"
+End of library at line 6606
+Lib Read:  Processed 6607 lines.
+Top internal fanout is 6 (load 504.679) from node _42_<0>,
+driven by DFFPOSX1 with strength 549.757 (fF driven at latency 300)
+Top fanout load-to-strength ratio is 0.986578 (latency = 295.973 ps)
+Top input node fanout is 5 (load 249.645) from node clk.
+0 gates exceed specified minimum load.
+0 buffers were added.
+0 gates were changed.
+
+Gate counts by drive strength:
+
+	"1" gates	In: 49    	Out: 49    	+0
+	"2" gates	In: 6    	Out: 6    	+0
+
+gates resized: 0
+
+Generating RTL verilog and SPICE netlist file in directory
+	 /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis
+Files:
+   Verilog: /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.rtl.v
+   Verilog: /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.rtlnopwr.v
+   Spice:   /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.spc
+
+Running blif2Verilog.
+Running blif2BSpice.
+Running spi2xspice.py
+Synthesis script ended on dom 6 dic 11:41:53 CST 2020
+Running blif2cel.tcl
+Loaded LEF file (/usr/share/qflow/tech/osu050/osu050_stdcells.lef) for reading...
+Loaded BLIF file (/home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.blif) for reading ...
+Loaded CEL file (/home/bran/Documentos/repositories/Design_process/Qflow/4b/layout/counter_4b.cel) for writing...
+1st pass of blif file /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.blif. . .
+Reading macros from LEF file. . .
+Parsing macro AOI21X1:  Ports are:
+parse_pin
+macroname: AOI21X1, pinname: A
+Port type: INPUT 
+A -360 -150 1
+parse_pin
+macroname: AOI21X1, pinname: B
+Port type: INPUT 
+B -120 -450 1
+parse_pin
+macroname: AOI21X1, pinname: C
+Port type: INPUT 
+C 360 -750 1
+parse_pin
+macroname: AOI21X1, pinname: gnd
+Port type: INOUT 
+gnd -1 -1500 1
+parse_pin
+macroname: AOI21X1, pinname: Y
+Port type: OUTPUT 
+Y 360 -150 1
+parse_pin
+macroname: AOI21X1, pinname: vdd
+Port type: INOUT 
+vdd -1 1500 1
+Parsing macro AOI22X1:  Ports are:
+parse_pin
+macroname: AOI22X1, pinname: A
+Port type: INPUT 
+A -480 -150 1
+parse_pin
+macroname: AOI22X1, pinname: B
+Port type: INPUT 
+B -240 -450 1
+parse_pin
+macroname: AOI22X1, pinname: C
+Port type: INPUT 
+C 479 -150 1
+parse_pin
+macroname: AOI22X1, pinname: D
+Port type: INPUT 
+D 240 -450 1
+parse_pin
+macroname: AOI22X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: AOI22X1, pinname: Y
+Port type: OUTPUT 
+Y 0 -150 1
+parse_pin
+macroname: AOI22X1, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro BUFX2:  Ports are:
+parse_pin
+macroname: BUFX2, pinname: A
+Port type: INPUT 
+A -240 -150 1
+parse_pin
+macroname: BUFX2, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: BUFX2, pinname: Y
+Port type: OUTPUT 
+Y 240 -450 1
+parse_pin
+macroname: BUFX2, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro DFFPOSX1:  Ports are:
+parse_pin
+macroname: DFFPOSX1, pinname: Q
+Port type: OUTPUT 
+Q 1320 -150 1
+parse_pin
+macroname: DFFPOSX1, pinname: CLK
+Port type: INPUT 
+CLK -1080 -450 1
+parse_pin
+macroname: DFFPOSX1, pinname: D
+Port type: INPUT 
+D -361 -150 1
+parse_pin
+macroname: DFFPOSX1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: DFFPOSX1, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro INVX1:  Ports are:
+parse_pin
+macroname: INVX1, pinname: A
+Port type: INPUT 
+A -120 -750 1
+parse_pin
+macroname: INVX1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: INVX1, pinname: Y
+Port type: OUTPUT 
+Y 120 -450 1
+parse_pin
+macroname: INVX1, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro NAND2X1:  Ports are:
+parse_pin
+macroname: NAND2X1, pinname: A
+Port type: INPUT 
+A -240 -450 1
+parse_pin
+macroname: NAND2X1, pinname: B
+Port type: INPUT 
+B 240 150 1
+parse_pin
+macroname: NAND2X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: NAND2X1, pinname: Y
+Port type: OUTPUT 
+Y 0 -150 1
+parse_pin
+macroname: NAND2X1, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro NAND3X1:  Ports are:
+parse_pin
+macroname: NAND3X1, pinname: A
+Port type: INPUT 
+A -360 150 1
+parse_pin
+macroname: NAND3X1, pinname: B
+Port type: INPUT 
+B -120 -150 1
+parse_pin
+macroname: NAND3X1, pinname: C
+Port type: INPUT 
+C 120 449 1
+parse_pin
+macroname: NAND3X1, pinname: gnd
+Port type: INOUT 
+gnd -1 -1500 1
+parse_pin
+macroname: NAND3X1, pinname: Y
+Port type: OUTPUT 
+Y 360 150 1
+parse_pin
+macroname: NAND3X1, pinname: vdd
+Port type: INOUT 
+vdd -1 1500 1
+Parsing macro NOR2X1:  Ports are:
+parse_pin
+macroname: NOR2X1, pinname: A
+Port type: INPUT 
+A -240 -750 1
+parse_pin
+macroname: NOR2X1, pinname: B
+Port type: INPUT 
+B 240 -150 1
+parse_pin
+macroname: NOR2X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1500 1
+parse_pin
+macroname: NOR2X1, pinname: Y
+Port type: OUTPUT 
+Y 0 -450 1
+parse_pin
+macroname: NOR2X1, pinname: vdd
+Port type: INOUT 
+vdd 0 1500 1
+Parsing macro OAI21X1:  Ports are:
+parse_pin
+macroname: OAI21X1, pinname: A
+Port type: INPUT 
+A -360 -450 1
+parse_pin
+macroname: OAI21X1, pinname: B
+Port type: INPUT 
+B -120 -150 1
+parse_pin
+macroname: OAI21X1, pinname: C
+Port type: INPUT 
+C 360 150 1
+parse_pin
+macroname: OAI21X1, pinname: gnd
+Port type: INOUT 
+gnd -1 -1500 1
+parse_pin
+macroname: OAI21X1, pinname: Y
+Port type: OUTPUT 
+Y 360 -450 1
+parse_pin
+macroname: OAI21X1, pinname: vdd
+Port type: INOUT 
+vdd -1 1500 1
+Parsing macro XNOR2X1:  Ports are:
+parse_pin
+macroname: XNOR2X1, pinname: A
+Port type: INPUT 
+A -720 -450 1
+parse_pin
+macroname: XNOR2X1, pinname: B
+Port type: INPUT 
+B 720 -450 1
+parse_pin
+macroname: XNOR2X1, pinname: gnd
+Port type: INOUT 
+gnd -1 -1500 1
+parse_pin
+macroname: XNOR2X1, pinname: Y
+Port type: OUTPUT 
+Y 239 -150 1
+parse_pin
+macroname: XNOR2X1, pinname: vdd
+Port type: INOUT 
+vdd -1 1500 1
+2nd pass of blif file. . .
+3rd pass of blif file. . .
+Done!
+No counter_4b.cel2 file found for project. . . continuing without pin placement hints
+Running GrayWolf placement
+
+twflow version:2.1 date:Mon May 25 21:15:08 EDT 1992
+Authors: Bill Swartz, Carl Sechen
+         Yale University
+
+syntax version:v1.1 date:Mon May 25 21:11:10 EDT 1992
+TimberWolf System Syntax Checker
+Authors: Carl Sechen, Kai-Win Lee, Bill Swartz,
+         Dahe Chen, and Jimmy Lam
+         Yale University
+
+Read   50 objects so far...
+No syntax errors were found
+
+syntax terminated normally with no errors and 0 warning[s]
+
+
+----------------------------
+Total stdcells     :55
+Total cell width   :5.42e+04
+Total cell height  :1.65e+05
+Total cell area    :1.63e+08
+Total core area    :1.63e+08
+Average cell height:3.00e+03
+
+
+nocut - replacement for Mincut version:v1.0 date:Mon May 25 21:09:40 EDT 1992
+TimberWolf System Floorplan Setup Program
+Authors: Carl Sechen, Bill Swartz,
+         Yale University
+
+Read   50 objects so far...
+Splitting counter_4b.cel into counter_4b.scel and counter_4b.mcel...
+	done!
+
+
+nocut - replacement for Mincut terminated normally with no errors and 0 warning[s]
+
+
+TimberWolfMC version:v2.2 date:Mon May 25 21:18:34 EDT 1992
+Authors: Carl Sechen, Bill Swartz, Kai-Win Lee
+         Dahe Chen, and Jimmy Lam
+         Yale University
+
+config version:v1.0 date:Mon May 25 20:57:18 EDT 1992
+Row configuration program
+    Yale University
+
+
+config switches:
+	Graphics mode on
+	config will inherit window
+
+
+Note: restore state file exists:counter_4b
+
+
+config terminated normally with no errors and 0 warning[s]
+
+
+TimberWolfMC terminated normally with no errors and 0 warning[s]
+
+
+
+TimberWolfSC switches:
+	Graphics mode on
+	TimberWolfSC will inherit window
+
+TimberWolfSC version:v6.0 date:Mon May 25 21:19:07 EDT 1992
+Row-Based Placement and Global Routing Program
+Authors: Carl Sechen, Kai-Win Lee, and Bill Swartz,
+         Yale University
+  0 
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15 
+ 16  17  18  19  20  21  22  23  24  25  26  27  28  29  30 
+ 31  32  33  34  35  36  37  38  39  40  41  42  43  44  45 
+ 46  47  48  49  50  51  52  53  54  55  56  57  58  59  60 
+ 61  62  63  64  65  66  67  68  69  70  71  72  73  74  75 
+ 76  77  78  79  80  81  82  83  84  85  86  87  88  89  90 
+ 91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 
+106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 
+121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 
+136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 
+151 152 153 
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   26
+ tracks =  24 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   27
+ tracks =  26 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   26
+ tracks =  24 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   28
+ tracks =  28 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   27
+ tracks =  26 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   26
+ tracks =  26 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   25
+ tracks =  24 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+ block left edge is at -239
+ the longest block length is 14880
+ building the steiner trees
+ rebuilding the steiner tree
+
+----start doing coarse global routing ------ 
+ ITERATION  1
+
+  longest Row is:1   Its length is:13680
+ doing feed-through pins assignment
+ building the net-tree now !
+ set up the global routing grids
+ the starting value of tracks =   28
+ tracks =  28 at attempts =  1000
+ removing redundant feed-through pins
+ the connectivity of all the nets is verified
+
+
+***********************************************
+*ACTUAL* FINAL NUMBER OF ROUTING TRACKS: 24
+***********************************************
+
+
+TimberWolfSC terminated normally with no errors and 0 warning[s]
+
+
+twflow terminated normally with no errors and 0 warning[s]
+
+Running getfillcell.tcl
+Using cell FILL for fill
+Running place2def.tcl
+Limits: xbot = -645.0 ybot = -795.0 xtop = 13845.0 ytop = 12195.0
+Core values: 120.0 150.0 13800.0 12150.0
+Offsets: 120.0 150.0
+3 routing layers
+44 horizontal tracks from -600.0 to 12600.0 step 300 (M1, M3, ...)
+61 vertical tracks from -480.0 to 14160.0 step 240.0 (M2, M4, ...)
+Done with place2def.tcl
+Running addspacers.tcl  counter_4b /usr/share/qflow/tech/osu050/osu050_stdcells.lef FILL
+Running addspacers.tcl
+Reading FILL macros from LEF file.
+Reading DEF file counter_4b.def. . .
+Number of rows is 4
+Longest row has width 138.0 um
+Analysis of DEF file:
+Number of components = 55
+New number of components = 57
+Number of rows = 4
+Done with addspacers.tcl
+Running blifanno.tcl
+Reading DEF file counter_4b.def. . .
+Done with blifanno.tcl
+
+Generating RTL verilog and SPICE netlist file in directory
+   /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis
+Files:
+   Verilog: /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.rtl.v
+   Verilog: /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.rtlnopwr.v
+   Spice:   /home/bran/Documentos/repositories/Design_process/Qflow/4b/synthesis/counter_4b.spc
+
+Running blif2Verilog.
+Running blif2BSpice.
+Placement script ended on dom 6 dic 11:41:55 CST 2020
+----------------------------------------------
+Vesta static timing analysis tool
+(c) 2013-2017 Tim Edwards, Open Circuit Design
+----------------------------------------------
+
+Parsing library "osu05_stdcells"
+End of library at line 6606
+Parsing module "counter_4b"
+Lib Read:  Processed 6607 lines.
+Verilog netlist read:  Processed 71 lines.
+Number of paths analyzed:  15
+
+Top 15 maximum delay paths:
+Path DFFPOSX1_3/CLK to DFFPOSX1_3/D delay 1731.14 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_3/D delay 1666.46 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_4/D delay 1649.44 ps
+Path DFFPOSX1_3/CLK to DFFPOSX1_4/D delay 1625.23 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_3/D delay 1623.83 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_4/D delay 1558.02 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_2/D delay 1461.94 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_2/D delay 1446.11 ps
+Path DFFPOSX1_4/CLK to DFFPOSX1_4/D delay 1424.08 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_1/D delay 1157.58 ps
+Path DFFPOSX1_4/CLK to output pin Q[3] delay 589.335 ps
+Path DFFPOSX1_2/CLK to output pin Q[1] delay 588.501 ps
+Path DFFPOSX1_1/CLK to output pin Q[0] delay 588.043 ps
+Path DFFPOSX1_3/CLK to output pin Q[2] delay 574.91 ps
+Path DFFPOSX1_5/CLK to output pin LOAD delay 416.438 ps
+Computed maximum clock frequency (zero slack) = 577.655 MHz
+-----------------------------------------
+
+Number of paths analyzed:  15
+
+Top 15 minimum delay paths:
+Path DFFPOSX1_5/CLK to output pin LOAD delay 335.614 ps
+Path DFFPOSX1_3/CLK to output pin Q[2] delay 415.19 ps
+Path DFFPOSX1_1/CLK to output pin Q[0] delay 469.042 ps
+Path DFFPOSX1_2/CLK to output pin Q[1] delay 469.63 ps
+Path DFFPOSX1_4/CLK to output pin Q[3] delay 470.497 ps
+Path DFFPOSX1_3/CLK to DFFPOSX1_3/D delay 794.641 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_1/D delay 820.932 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_3/D delay 856.238 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_3/D delay 858.727 ps
+Path DFFPOSX1_4/CLK to DFFPOSX1_4/D delay 861.01 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_4/D delay 909.819 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_4/D delay 925.188 ps
+Path DFFPOSX1_1/CLK to DFFPOSX1_2/D delay 944.038 ps
+Path DFFPOSX1_2/CLK to DFFPOSX1_2/D delay 945.813 ps
+Path DFFPOSX1_3/CLK to DFFPOSX1_4/D delay 947.606 ps
+Design meets minimum hold timing.
+-----------------------------------------
+
+Number of paths analyzed:  29
+
+Top 20 maximum delay paths:
+Path input pin MODO[0] to DFFPOSX1_2/D delay 1119.84 ps
+Path input pin MODO[1] to DFFPOSX1_2/D delay 1036.21 ps
+Path input pin MODO[0] to DFFPOSX1_5/D delay 911.353 ps
+Path input pin MODO[0] to DFFPOSX1_1/D delay 905.95 ps
+Path input pin MODO[0] to DFFPOSX1_4/D delay 885.422 ps
+Path input pin MODO[0] to DFFPOSX1_3/D delay 885.422 ps
+Path input pin MODO[1] to DFFPOSX1_5/D delay 828.611 ps
+Path input pin MODO[1] to DFFPOSX1_1/D delay 819.516 ps
+Path input pin MODO[1] to DFFPOSX1_3/D delay 806.85 ps
+Path input pin MODO[1] to DFFPOSX1_4/D delay 806.85 ps
+Path input pin ENABLE to DFFPOSX1_2/D delay 795.441 ps
+Path input pin RESET to DFFPOSX1_2/D delay 716.368 ps
+Path input pin ENABLE to DFFPOSX1_5/D delay 557.065 ps
+Path input pin RESET to DFFPOSX1_5/D delay 491.021 ps
+Path input pin RESET to DFFPOSX1_1/D delay 465.967 ps
+Path input pin RESET to DFFPOSX1_3/D delay 465.967 ps
+Path input pin RESET to DFFPOSX1_4/D delay 465.967 ps
+Path input pin ENABLE to DFFPOSX1_1/D delay 458.702 ps
+Path input pin ENABLE to DFFPOSX1_3/D delay 458.702 ps
+Path input pin ENABLE to DFFPOSX1_4/D delay 458.702 ps
+-----------------------------------------
+
+Number of paths analyzed:  29
+
+Top 20 minimum delay paths:
+Path input pin clk to DFFPOSX1_5/CLK delay 0 ps
+Path input pin clk to DFFPOSX1_4/CLK delay 0 ps
+Path input pin clk to DFFPOSX1_3/CLK delay 0 ps
+Path input pin clk to DFFPOSX1_2/CLK delay 0 ps
+Path input pin clk to DFFPOSX1_1/CLK delay 0 ps
+Path input pin D[1] to DFFPOSX1_2/D delay 132.383 ps
+Path input pin D[0] to DFFPOSX1_1/D delay 195.106 ps
+Path input pin D[3] to DFFPOSX1_4/D delay 230.875 ps
+Path input pin D[2] to DFFPOSX1_3/D delay 230.875 ps
+Path input pin MODO[0] to DFFPOSX1_2/D delay 255.543 ps
+Path input pin MODO[0] to DFFPOSX1_3/D delay 313.375 ps
+Path input pin MODO[1] to DFFPOSX1_4/D delay 360.566 ps
+Path input pin MODO[0] to DFFPOSX1_4/D delay 378.133 ps
+Path input pin MODO[1] to DFFPOSX1_3/D delay 378.97 ps
+Path input pin MODO[1] to DFFPOSX1_1/D delay 387.327 ps
+Path input pin RESET to DFFPOSX1_4/D delay 401.143 ps
+Path input pin RESET to DFFPOSX1_3/D delay 401.143 ps
+Path input pin RESET to DFFPOSX1_1/D delay 401.143 ps
+Path input pin ENABLE to DFFPOSX1_4/D delay 401.158 ps
+Path input pin ENABLE to DFFPOSX1_3/D delay 401.158 ps
+-----------------------------------------
+
+Qrouter detail maze router version 1.3.80.T
+No .cfg file specified, continuing without.
+Reading LEF data from file /usr/share/qflow/tech/osu050/osu050_stdcells.lef.
+LEF Read, Line 95: Don't know how to parse layer "via"
+LEF Read, Line 96: No layer defined for RECT.
+LEF Read, Line 104: Don't know how to parse layer "via2"
+LEF Read, Line 105: No layer defined for RECT.
+LEF Read, Line 111: Unknown keyword "GENERATE" in LEF file; ignoring.
+LEF Read, Line 115: Unknown keyword "OVERHANG" in LEF file; ignoring.
+LEF Read, Line 116: Unknown keyword "METALOVERHANG" in LEF file; ignoring.
+LEF Read, Line 120: Unknown keyword "OVERHANG" in LEF file; ignoring.
+LEF Read, Line 121: Unknown keyword "METALOVERHANG" in LEF file; ignoring.
+LEF Read, Line 122: Don't know how to parse layer "via"
+LEF Read, Line 123: No layer defined for RECT.
+LEF Read, Line 127: Unknown keyword "GENERATE" in LEF file; ignoring.
+LEF Read, Line 131: Unknown keyword "OVERHANG" in LEF file; ignoring.
+LEF Read, Line 132: Unknown keyword "METALOVERHANG" in LEF file; ignoring.
+LEF Read, Line 136: Unknown keyword "OVERHANG" in LEF file; ignoring.
+LEF Read, Line 137: Unknown keyword "METALOVERHANG" in LEF file; ignoring.
+LEF Read, Line 138: Don't know how to parse layer "via2"
+LEF Read, Line 139: No layer defined for RECT.
+LEF Read, Line 143: Unknown keyword "GENERATE" in LEF file; ignoring.
+LEF Read, Line 150: Unknown keyword "GENERATE" in LEF file; ignoring.
+LEF Read, Line 157: Unknown keyword "GENERATE" in LEF file; ignoring.
+LEF file:  Defines site corner (ignored)
+LEF file:  Defines site IO (ignored)
+LEF file:  Defines site core (ignored)
+LEF Read, Line 192: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 201: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 233: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 249: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 302: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 318: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 379: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 395: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 458: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 474: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 520: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 536: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 577: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 593: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 650: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 659: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 734: Don't know how to parse layer "via"
+LEF Read, Line 779: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 795: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 865: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 874: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 946: Don't know how to parse layer "via"
+LEF Read, Line 1003: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1012: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1094: Don't know how to parse layer "via"
+LEF Read, Line 1143: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1152: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1212: Don't know how to parse layer "via"
+LEF Read, Line 1237: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1253: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1286: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1302: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1335: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1351: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1386: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1402: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1451: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1467: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1518: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1534: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1583: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1599: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1651: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1667: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1731: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1747: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1799: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1815: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1869: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1885: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1936: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 1952: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2003: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2019: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2081: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2097: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2150: Don't know how to parse layer "via"
+LEF Read, Line 2192: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2208: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2264: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2280: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2336: Don't know how to parse layer "via"
+LEF Read, Line 2378: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2387: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2422: Don't know how to parse layer "via"
+LEF Read, Line 2477: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2486: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2593: Don't know how to parse layer "via"
+LEF Read, Line 2638: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2654: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2717: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2733: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2812: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2828: Unknown keyword "SHAPE" in LEF file; ignoring.
+LEF Read, Line 2951: Unknown keyword "CLASS" in LEF file; ignoring.
+LEF Read, Line 3123: Unknown keyword "CLASS" in LEF file; ignoring.
+LEF read: Processed 3221 lines.
+LEF Read: encountered 97 errors total.
+Reading DEF data from file counter_4b.def.
+Diagnostic: Design name: "counter_4b"
+  Processed 57 subcell instances total.
+  Processed 15 pins total.
+  Processed 65 nets total.
+DEF read: Processed 376 lines.
+Output scale = microns / 100, precision 1
+There are 65 nets in this design.
+*** Running stage1 routing with defaults
+Finished routing net _42_<0>
+Nets remaining: 64
+Finished routing net _42_<1>
+Nets remaining: 63
+Finished routing net _3_
+Nets remaining: 62
+Finished routing net _42_<3>
+Nets remaining: 61
+Finished routing net clk
+Nets remaining: 60
+Finished routing net MODO<0>
+Nets remaining: 59
+Finished routing net _4_
+Nets remaining: 58
+Finished routing net MODO<1>
+Nets remaining: 57
+Finished routing net _6_
+Nets remaining: 56
+Finished routing net _42_<2>
+Nets remaining: 55
+Finished routing net _22_
+Nets remaining: 54
+Finished routing net _5_
+Nets remaining: 53
+Finished routing net _9_
+Nets remaining: 52
+Finished routing net _11_
+Nets remaining: 51
+Finished routing net _0_
+Nets remaining: 50
+Finished routing net _12_
+Nets remaining: 49
+Finished routing net _14_
+Nets remaining: 48
+Finished routing net _15_
+Nets remaining: 47
+Finished routing net _19_
+Nets remaining: 46
+Failed to route net _20_
+Finished routing net _21_
+Nets remaining: 45
+Finished routing net _23_
+Nets remaining: 44
+Finished routing net _24_
+Nets remaining: 43
+Failed to route net _27_
+Finished routing net _34_
+Nets remaining: 42
+Finished routing net RESET
+Nets remaining: 41
+Finished routing net _2_
+Nets remaining: 40
+Finished routing net ENABLE
+Nets remaining: 39
+Finished routing net _7_
+Nets remaining: 38
+Finished routing net D<0>
+Nets remaining: 37
+Finished routing net _8_
+Nets remaining: 36
+Finished routing net _10_
+Nets remaining: 35
+Failed to route net _1_<0>
+Finished routing net _13_
+Nets remaining: 34
+Finished routing net _16_
+Nets remaining: 33
+Finished routing net _17_
+Nets remaining: 32
+Finished routing net D<1>
+Nets remaining: 31
+Finished routing net _18_
+Nets remaining: 30
+Finished routing net _1_<1>
+Nets remaining: 29
+Finished routing net _25_
+Nets remaining: 28
+Failed to route net _26_
+Failed to route net _28_
+Finished routing net _29_
+Nets remaining: 27
+Finished routing net D<2>
+Nets remaining: 26
+Finished routing net _30_
+Nets remaining: 25
+Finished routing net _1_<2>
+Nets remaining: 24
+Finished routing net _31_
+Nets remaining: 23
+Finished routing net D<3>
+Nets remaining: 22
+Finished routing net _32_
+Nets remaining: 21
+Finished routing net _33_
+Nets remaining: 20
+Failed to route net _35_
+Failed to route net _36_
+Finished routing net _37_
+Nets remaining: 19
+Finished routing net _38_
+Nets remaining: 18
+Finished routing net _39_
+Nets remaining: 17
+Failed to route net _40_
+Finished routing net _1_<3>
+Nets remaining: 16
+Finished routing net _41_
+Nets remaining: 15
+Finished routing net LOAD
+Nets remaining: 14
+Finished routing net Q<0>
+Nets remaining: 13
+Finished routing net Q<1>
+Nets remaining: 12
+Finished routing net Q<2>
+Nets remaining: 11
+Finished routing net Q<3>
+Nets remaining: 10
+Finished routing net RCO
+Nets remaining: 9
+Finished routing net gnd
+Nets remaining: 8
+
+----------------------------------------------
+Progress: Stage 1 total routes completed: 112
+Failed net routes: 9
+----------------------------------------------
+*** Running stage2 routing with options mask 10, effort 10
+Nets remaining: 9
+Best route of _40_ collides with nets: _37_ 
+Ripping up blocking net _37_
+Nets remaining: 9
+Best route of _36_ collides with nets: _42_<3> 
+Ripping up blocking net _42_<3>
+Nets remaining: 9
+Nets remaining: 8
+Best route of _28_ collides with net: MODO<0> MODO<1> 
+Ripping up blocking net MODO<0>
+Ripping up blocking net MODO<1>
+Nets remaining: 9
+Best route of _26_ collides with nets: _28_ 
+Ripping up blocking net _28_
+Nets remaining: 9
+Best route of _1_<0> collides with nets: _42_<0> 
+Ripping up blocking net _42_<0>
+Nets remaining: 9
+Nets remaining: 8
+Best route of _20_ collides with nets: _26_ 
+Ripping up blocking net _26_
+Nets remaining: 8
+Nets remaining: 7
+Best route of _37_ collides with nets: _36_ 
+Ripping up blocking net _36_
+Nets remaining: 7
+Nets remaining: 6
+Best route of MODO<0> collides with nets: _37_ 
+Ripping up blocking net _37_
+Nets remaining: 6
+Nets remaining: 5
+Best route of _28_ collides with nets: _20_ 
+Ripping up blocking net _20_
+Nets remaining: 5
+Best route of _42_<0> collides with net: _11_ _6_ _27_ 
+Ripping up blocking net _11_
+Ripping up blocking net _6_
+Ripping up blocking net _27_
+Nets remaining: 7
+Nets remaining: 6
+Best route of _36_ collides with nets: MODO<0> 
+Ripping up blocking net MODO<0>
+Nets remaining: 6
+Nets remaining: 5
+Nets remaining: 4
+Nets remaining: 3
+Best route of _6_ collides with nets: _9_ 
+Ripping up blocking net _9_
+Nets remaining: 3
+Best route of _27_ collides with nets: clk 
+Ripping up blocking net clk
+Nets remaining: 3
+Best route of MODO<0> collides with nets: _1_<3> 
+Ripping up blocking net _1_<3>
+Nets remaining: 3
+Best route of _9_ collides with net: _42_<0> _26_ _28_ _42_<1> _22_ _23_ 
+Ripping up blocking net _42_<0>
+Ripping up blocking net _26_
+Ripping up blocking net _28_
+Ripping up blocking net _42_<1>
+Ripping up blocking net _22_
+Ripping up blocking net _23_
+Nets remaining: 8
+Nets remaining: 7
+Best route of _1_<3> collides with net: MODO<0> _11_ 
+Ripping up blocking net MODO<0>
+Ripping up blocking net _11_
+Nets remaining: 8
+Best route of _42_<0> collides with nets: _9_ 
+Ripping up blocking net _9_
+Nets remaining: 8
+Nets remaining: 7
+Nets remaining: 6
+Nets remaining: 5
+Nets remaining: 4
+Nets remaining: 3
+Best route of MODO<0> collides with nets: _40_ 
+Ripping up blocking net _40_
+
+No progress at level of effort 10; ending 2nd stage.
+
+----------------------------------------------
+Progress: Stage 2 total routes completed: 194
+Failed net routes: 3
+----------------------------------------------
+*** Running stage2 routing with options mask 20, effort 10
+Nets remaining: 3
+Best route of _11_ collides with net: _23_ _10_ 
+Ripping up blocking net _23_
+Ripping up blocking net _10_
+Nets remaining: 4
+Best route of _9_ collides with nets: _11_ 
+Ripping up blocking net _11_
+Nets remaining: 4
+Nets remaining: 3
+Best route of _23_ collides with net: _9_ _40_ 
+Ripping up blocking net _9_
+Ripping up blocking net _40_
+Nets remaining: 4
+Nets remaining: 3
+Best route of _11_ collides with nets: _36_ 
+Ripping up blocking net _36_
+Nets remaining: 3
+Best route of _9_ collides with net: _42_<2> _23_ 
+Ripping up blocking net _42_<2>
+Ripping up blocking net _23_
+Nets remaining: 4
+Nets remaining: 3
+Best route of _36_ collides with nets: _11_ 
+Ripping up blocking net _11_
+Nets remaining: 3
+Best route of _42_<2> collides with nets: _9_ 
+Ripping up blocking net _9_
+Nets remaining: 3
+Nets remaining: 2
+Nets remaining: 1
+Best route of _9_ collides with net: gnd _6_ _42_<0> _42_<1> _28_ 
+Ripping up blocking net gnd
+Ripping up blocking net _6_
+Ripping up blocking net _42_<0>
+Ripping up blocking net _42_<1>
+Ripping up blocking net _28_
+Nets remaining: 5
+Best route of gnd collides with nets: _9_ 
+Ripping up blocking net _9_
+Nets remaining: 5
+Nets remaining: 4
+Nets remaining: 3
+Nets remaining: 2
+Best route of _28_ collides with nets: _42_<2> 
+Ripping up blocking net _42_<2>
+Nets remaining: 2
+Best route of _9_ collides with net: _23_ _11_ 
+Ripping up blocking net _23_
+Ripping up blocking net _11_
+Nets remaining: 4
+Nets remaining: 3
+Nets remaining: 2
+Best route of _23_ collides with nets: _39_ 
+Ripping up blocking net _39_
+Nets remaining: 2
+Best route of _11_ collides with nets: _42_<2> 
+Ripping up blocking net _42_<2>
+Nets remaining: 2
+Nets remaining: 1
+Best route of _42_<2> collides with nets: _11_ 
+Ripping up blocking net _11_
+Nets remaining: 1
+Best route of _11_ collides with nets: _22_ 
+Ripping up blocking net _22_
+Nets remaining: 1
+Best route of _22_ collides with nets: _11_ 
+Ripping up blocking net _11_
+Nets remaining: 1
+
+----------------------------------------------
+Progress: Stage 2 total routes completed: 269
+No failed routes!
+----------------------------------------------
+*** Running stage3 routing with defaults, 1st round
+Finished routing net _42_<0>
+Nets remaining: 64
+Finished routing net _42_<1>
+Nets remaining: 63
+Finished routing net _3_
+Nets remaining: 62
+Finished routing net _42_<3>
+Nets remaining: 61
+Finished routing net clk
+Nets remaining: 60
+Finished routing net MODO<0>
+Nets remaining: 59
+Finished routing net _4_
+Nets remaining: 58
+Finished routing net MODO<1>
+Nets remaining: 57
+Finished routing net _6_
+Nets remaining: 56
+Finished routing net _42_<2>
+Nets remaining: 55
+Finished routing net _22_
+Nets remaining: 54
+Finished routing net _5_
+Nets remaining: 53
+Finished routing net _9_
+Nets remaining: 52
+Finished routing net _11_
+Nets remaining: 51
+Finished routing net _0_
+Nets remaining: 50
+Finished routing net _12_
+Nets remaining: 49
+Finished routing net _14_
+Nets remaining: 48
+Finished routing net _15_
+Nets remaining: 47
+Finished routing net _19_
+Nets remaining: 46
+Finished routing net _20_
+Nets remaining: 45
+Finished routing net _21_
+Nets remaining: 44
+Finished routing net _23_
+Nets remaining: 43
+Finished routing net _24_
+Nets remaining: 42
+Finished routing net _27_
+Nets remaining: 41
+Finished routing net _34_
+Nets remaining: 40
+Finished routing net RESET
+Nets remaining: 39
+Finished routing net _2_
+Nets remaining: 38
+Finished routing net ENABLE
+Nets remaining: 37
+Finished routing net _7_
+Nets remaining: 36
+Finished routing net D<0>
+Nets remaining: 35
+Finished routing net _8_
+Nets remaining: 34
+Finished routing net _10_
+Nets remaining: 33
+Finished routing net _1_<0>
+Nets remaining: 32
+Finished routing net _13_
+Nets remaining: 31
+Finished routing net _16_
+Nets remaining: 30
+Finished routing net _17_
+Nets remaining: 29
+Finished routing net D<1>
+Nets remaining: 28
+Finished routing net _18_
+Nets remaining: 27
+Finished routing net _1_<1>
+Nets remaining: 26
+Finished routing net _25_
+Nets remaining: 25
+Finished routing net _26_
+Nets remaining: 24
+Finished routing net _28_
+Nets remaining: 23
+Finished routing net _29_
+Nets remaining: 22
+Finished routing net D<2>
+Nets remaining: 21
+Finished routing net _30_
+Nets remaining: 20
+Finished routing net _1_<2>
+Nets remaining: 19
+Finished routing net _31_
+Nets remaining: 18
+Finished routing net D<3>
+Nets remaining: 17
+Finished routing net _32_
+Nets remaining: 16
+Finished routing net _33_
+Nets remaining: 15
+Finished routing net _35_
+Nets remaining: 14
+Finished routing net _36_
+Nets remaining: 13
+Finished routing net _37_
+Nets remaining: 12
+Finished routing net _38_
+Nets remaining: 11
+Finished routing net _39_
+Nets remaining: 10
+Finished routing net _40_
+Nets remaining: 9
+Finished routing net _1_<3>
+Nets remaining: 8
+Finished routing net _41_
+Nets remaining: 7
+Finished routing net LOAD
+Nets remaining: 6
+Finished routing net Q<0>
+Nets remaining: 5
+Finished routing net Q<1>
+Nets remaining: 4
+Finished routing net Q<2>
+Nets remaining: 3
+Finished routing net Q<3>
+Nets remaining: 2
+Finished routing net RCO
+Nets remaining: 1
+Finished routing net gnd
+Nets remaining: 0
+
+----------------------------------------------
+Progress: Stage 3 total routes completed: 391
+No failed routes!
+----------------------------------------------
+*** Running stage3 routing with defaults, 2nd round
+Finished routing net _42_<0>
+Nets remaining: 64
+Finished routing net _42_<1>
+Nets remaining: 63
+Finished routing net _3_
+Nets remaining: 62
+Finished routing net _42_<3>
+Nets remaining: 61
+Finished routing net clk
+Nets remaining: 60
+Finished routing net MODO<0>
+Nets remaining: 59
+Finished routing net _4_
+Nets remaining: 58
+Finished routing net MODO<1>
+Nets remaining: 57
+Finished routing net _6_
+Nets remaining: 56
+Finished routing net _42_<2>
+Nets remaining: 55
+Finished routing net _22_
+Nets remaining: 54
+Finished routing net _5_
+Nets remaining: 53
+Finished routing net _9_
+Nets remaining: 52
+Finished routing net _11_
+Nets remaining: 51
+Finished routing net _0_
+Nets remaining: 50
+Finished routing net _12_
+Nets remaining: 49
+Finished routing net _14_
+Nets remaining: 48
+Finished routing net _15_
+Nets remaining: 47
+Finished routing net _19_
+Nets remaining: 46
+Finished routing net _20_
+Nets remaining: 45
+Finished routing net _21_
+Nets remaining: 44
+Finished routing net _23_
+Nets remaining: 43
+Finished routing net _24_
+Nets remaining: 42
+Finished routing net _27_
+Nets remaining: 41
+Finished routing net _34_
+Nets remaining: 40
+Finished routing net RESET
+Nets remaining: 39
+Finished routing net _2_
+Nets remaining: 38
+Finished routing net ENABLE
+Nets remaining: 37
+Finished routing net _7_
+Nets remaining: 36
+Finished routing net D<0>
+Nets remaining: 35
+Finished routing net _8_
+Nets remaining: 34
+Finished routing net _10_
+Nets remaining: 33
+Finished routing net _1_<0>
+Nets remaining: 32
+Finished routing net _13_
+Nets remaining: 31
+Finished routing net _16_
+Nets remaining: 30
+Finished routing net _17_
+Nets remaining: 29
+Finished routing net D<1>
+Nets remaining: 28
+Finished routing net _18_
+Nets remaining: 27
+Finished routing net _1_<1>
+Nets remaining: 26
+Finished routing net _25_
+Nets remaining: 25
+Finished routing net _26_
+Nets remaining: 24
+Finished routing net _28_
+Nets remaining: 23
+Finished routing net _29_
+Nets remaining: 22
+Finished routing net D<2>
+Nets remaining: 21
+Finished routing net _30_
+Nets remaining: 20
+Finished routing net _1_<2>
+Nets remaining: 19
+Finished routing net _31_
+Nets remaining: 18
+Finished routing net D<3>
+Nets remaining: 17
+Finished routing net _32_
+Nets remaining: 16
+Finished routing net _33_
+Nets remaining: 15
+Finished routing net _35_
+Nets remaining: 14
+Finished routing net _36_
+Nets remaining: 13
+Finished routing net _37_
+Nets remaining: 12
+Finished routing net _38_
+Nets remaining: 11
+Finished routing net _39_
+Nets remaining: 10
+Finished routing net _40_
+Nets remaining: 9
+Finished routing net _1_<3>
+Nets remaining: 8
+Finished routing net _41_
+Nets remaining: 7
+Finished routing net LOAD
+Nets remaining: 6
+Finished routing net Q<0>
+Nets remaining: 5
+Finished routing net Q<1>
+Nets remaining: 4
+Finished routing net Q<2>
+Nets remaining: 3
+Finished routing net Q<3>
+Nets remaining: 2
+Finished routing net RCO
+Nets remaining: 1
+Finished routing net gnd
+Nets remaining: 0
+
+----------------------------------------------
+Progress: Stage 3 total routes completed: 513
+No failed routes!
+----------------------------------------------
+*** Writing DEF file (default)
+----------------------------------------------
+Final: No failed routes!
+----------------------------------------------
+Router script ended on dom 6 dic 11:41:55 CST 2020

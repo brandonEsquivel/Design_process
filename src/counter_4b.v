@@ -9,7 +9,7 @@
 `timescale 1 ns / 1 ps
 
 
-module contador_4b(
+module  counter_4b(
   // inputs
   input wire ENABLE, RESET, clk,
   input wire [3:0]  D,

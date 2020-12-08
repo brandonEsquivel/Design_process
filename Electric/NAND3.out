@@ -1,0 +1,27 @@
+Note: can't find init file.
+******
+** ngspice-33 : Circuit level simulation program
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2020, The ngspice team.
+** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html
+** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html
+** Creation Date: Oct 18 2020   14:55:48
+******
+
+Circuit: *** spice deck for cell nand3{lay} from library gates
+
+Error on line 21 :
+  cload y_nand3 0 200 ff
+  unknown parameter (ff) 
+    Simulation interrupted due to error!
+
+ngspice 1 -> 
+Circuit: *** spice deck for cell nand3{lay} from library gates
+
+Error on line 21 :
+  cload y_nand3 0 200 ff
+  unknown parameter (ff) 
+    Simulation interrupted due to error!
+
+ngspice 2 -> ngspice-33 done
